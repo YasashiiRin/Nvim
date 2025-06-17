@@ -10,7 +10,23 @@ if true then return {} end
 -- * override the configuration of LazyVim plugins
 return {
   -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
+  { 
+    "folke/tokyonight.nvim",
+
+    otps = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    }
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#000000",
+    },
+  },
 
   -- Configure LazyVim to load gruvbox
   {
@@ -182,6 +198,22 @@ return {
   -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
   { import = "lazyvim.plugins.extras.lang.json" },
 
+
+  {
+    "fei6409/log-highlight.nvim",
+    config = function()
+      require("log-highlight").setup {
+        extension = "log", -- Các tệp có đuôi .log sẽ được tô màu
+        filename = { "messages" }, -- Các tệp có tên cụ thể
+        pattern = {
+          "/var/log/.*", -- Các tệp nhật ký trong thư mục /var/log,
+          "Dev/Hammock/hammock-app/log/development.log",
+          "messages%..*", -- Các tệp bắt đầu bằng "messages"
+        },
+      }
+    end,
+  },
+
   -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
@@ -194,4 +226,5 @@ return {
       },
     },
   },
+
 }
